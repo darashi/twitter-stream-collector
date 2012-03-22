@@ -2,15 +2,4 @@
 
 require('coffee-script');
 
-if (!process.env.DB_PATH || !process.env.TWITTER_USERNAME || !process.env.TWITTER_PASSWORD) {
-  console.info("Usage: ");
-  console.info();
-  console.info("DB_PATH='[/data/twitter/]YYYY/MM/[twitter].YYYYMMDDHH[.jsons]' TWITTER_USERNAME=username TWITTER_PASSWORD=password "+process.argv[1]);
-  process.exit(-1);
-}
-
-require(__dirname + '/../lib/server.coffee').run(
-  process.env.DB_PATH,
-  process.env.TWITTER_USERNAME,
-  process.env.TWITTER_PASSWORD
-);
+require(__dirname + '/../lib/server.coffee').run()
