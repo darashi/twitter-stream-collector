@@ -1,0 +1,19 @@
+{
+  "name":"twitter-stream-collector",
+  "version":"0.0.0",
+  "dependencies":{
+    "coffee-script":"",
+    "twitter-raw-stream":"",
+    "mkdirp":"",
+    "moment":""
+  },
+  "engines":{
+    "node":"~0.6.0"
+  },
+  "scripts":{
+    "start":"./bin/twitter-stream-collector"
+  },
+  "bin":{
+    "twitter-stream-collector":"./bin/twitter-stream-collector"
+  }
+}
