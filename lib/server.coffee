@@ -1,6 +1,5 @@
 Storage = require('./storage')
 TwitterRawStream = require('twitter-raw-stream')
-redis = require('redis')
 
 exports.run = ->
   if !process.env.DB_PATH || !process.env.TWITTER_USERNAME || !process.env.TWITTER_PASSWORD
@@ -41,28 +40,5 @@ exports.run = ->
 
   trs.on 'connect', ->
     console.info "Connection established"
-
-  if process.env.REDIS_CHANNEL
-    channel = process.env.REDIS_CHANNEL
-    host = process.env.REDIS_HOST || '127.0.0.1'
-    port = process.env.REDIS_PORT || 6379
-    password = process.env.REDIS_PASSWORD
-    console.log "Connecting to Redis on %s:%s", host, port
-    client = redis.createClient(port, host)
-
-    if password?
-      console.info "Setting Redis password"
-      client.auth(password)
-
-    client.on 'error', (error) ->
-      console.warn 'Redis connection error: %s', error
-
-    client.on 'connect', ->
-      console.info 'Redis connected'
-
-    console.info "Messages are directed to channel '%s'", channel
-
-    trs.on 'data', (json, message) ->
-      client.publish(channel, json)
 
   trs.start()
